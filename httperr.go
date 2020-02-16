@@ -21,7 +21,7 @@ func StatusCodeAndText(err error) (int, string) {
 	err = pkgerrors.Cause(err)
 
 	var scater statusCodeAndTexter
-	if errors.As(err, &scater) {
+	if pkgerrors.As(err, &scater) {
 		return scater.StatusCodeAndText()
 	}
 
@@ -43,7 +43,7 @@ func Write(w http.ResponseWriter, r *http.Request, err error) {
 	err = pkgerrors.Cause(err)
 
 	var errWriter Writer
-	if errors.As(err, &errWriter) {
+	if pkgerrors.As(err, &errWriter) {
 		errWriter.WriteError(w, r)
 		return
 	}
